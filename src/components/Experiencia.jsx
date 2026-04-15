@@ -6,10 +6,13 @@ function Experiencia({ experiencia }) {
       </h3>
 
       <div className="flex flex-col gap-5">
-        {experiencia.map((exp, i) => (
+        {experiencia.map((exp, i) => {
+          const isBurgerStation = JSON.stringify(exp).toLowerCase().includes('burger station');
+          return (
           <div
             key={i}
-            className="bg-white rounded-xl p-6 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-l-4 border-lila"
+            onClick={isBurgerStation ? () => window.open('https://fronted-burger-station.vercel.app/', '_blank', 'noopener,noreferrer') : undefined}
+            className={`bg-white rounded-xl p-6 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-l-4 border-lila ${isBurgerStation ? 'cursor-pointer' : ''}`}
           >
             <div className="flex justify-between items-start mb-3">
               <div>
@@ -74,7 +77,7 @@ function Experiencia({ experiencia }) {
               </ul>
             )}
           </div>
-        ))}
+        )})}
       </div>
     </section>
   );
