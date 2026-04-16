@@ -7,7 +7,7 @@ function Experiencia({ experiencia }) {
 
       <div className="flex flex-col gap-5">
         {experiencia.map((exp, i) => {
-          const isBurgerStation = JSON.stringify(exp).toLowerCase().includes('burger station');
+          const isBurgerStation = /burger|burguer|burge/i.test(JSON.stringify(exp));
           return (
           <div
             key={i}
