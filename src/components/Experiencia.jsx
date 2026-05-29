@@ -1,83 +1,104 @@
 function Experiencia({ experiencia }) {
+  const items = experiencia.flatMap((exp) => {
+    if (exp.proyectos) {
+      return exp.proyectos.map((proyecto) => ({
+        nombre: proyecto.cliente,
+        rol: exp.rol,
+        modalidad: exp.modalidad,
+        periodo: exp.periodo,
+        ubicacion: exp.ubicacion,
+        url: proyecto.url,
+        imagen: proyecto.imagen,
+        logros: proyecto.logros,
+      }));
+    }
+    return [{
+      nombre: exp.empresa || exp.modalidad,
+      rol: exp.rol,
+      periodo: exp.periodo,
+      ubicacion: exp.ubicacion,
+      url: exp.url,
+      imagen: exp.imagen,
+      logros: exp.logros,
+      descripcion: exp.descripcion,
+    }];
+  });
+
   return (
     <section className="mb-12">
       <h3 className="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-naranja pl-4">
         Experiencia Profesional
       </h3>
 
-      <div className="flex flex-col gap-5">
-        {experiencia.map((exp, i) => {
-          const isBurgerStation = /burger|burguer|burge/i.test(JSON.stringify(exp));
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {items.map((item, i) => {
+          const isClickable = !!item.url;
           return (
-          <div
-            key={i}
-            onClick={isBurgerStation ? () => window.open('https://fronted-burger-station.vercel.app/', '_blank', 'noopener,noreferrer') : undefined}
-            className={`bg-white rounded-xl p-6 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-l-4 border-lila ${isBurgerStation ? 'cursor-pointer' : ''}`}
-          >
-            <div className="flex justify-between items-start mb-3">
-              <div>
-                <h4 className="text-lg font-bold text-gray-800">
-                  {exp.empresa || exp.modalidad}
-                </h4>
-                <p className="text-naranja font-semibold">{exp.rol}</p>
+            <div
+              key={i}
+              onClick={isClickable ? () => window.open(item.url, '_blank', 'noopener,noreferrer') : undefined}
+              className={`bg-white rounded-xl overflow-hidden shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-l-4 border-lila ${isClickable ? 'cursor-pointer' : ''}`}
+            >
+              {item.imagen && (
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={item.imagen}
+                    alt={item.nombre}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
+                  {isClickable && (
+                    <span className="absolute bottom-3 right-3 bg-naranja text-white text-xs font-bold px-3 py-1 rounded-full">
+                      Ver →
+                    </span>
+                  )}
+                </div>
+              )}
 
-                {exp.ubicacion && (
-                  <p className="text-gray-400 text-sm">📍 {exp.ubicacion}</p>
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-800">{item.nombre}</h4>
+                    <p className="text-naranja font-semibold">{item.rol}</p>
+                    {item.modalidad && (
+                      <p className="text-gray-500 text-sm">{item.modalidad}</p>
+                    )}
+                    {item.ubicacion && (
+                      <p className="text-gray-400 text-sm">📍 {item.ubicacion}</p>
+                    )}
+                  </div>
+                  <div className="flex flex-col items-end gap-2">
+                    {item.periodo && (
+                      <span className="bg-lila-claro text-lila text-xs font-bold px-3 py-1 rounded-full">
+                        {item.periodo}
+                      </span>
+                    )}
+                    {isClickable && !item.imagen && (
+                      <span className="bg-naranja text-white text-xs font-bold px-3 py-1 rounded-full">
+                        Ver →
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {item.descripcion && (
+                  <p className="text-gray-600 text-sm mb-3">{item.descripcion}</p>
+                )}
+
+                {item.logros && (
+                  <ul className="flex flex-col gap-1 mt-2">
+                    {item.logros.map((logro, k) => (
+                      <li key={k} className="text-gray-600 text-sm flex items-start gap-2">
+                        <span className="text-naranja mt-0.5">▸</span>
+                        {logro}
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
-
-              {exp.periodo && (
-                <span className="bg-lila-claro text-lila text-xs font-bold px-3 py-1 rounded-full">
-                  {exp.periodo}
-                </span>
-              )}
             </div>
-
-            {exp.descripcion && (
-              <p className="text-gray-600 text-sm mb-3">{exp.descripcion}</p>
-            )}
-
-            {/* proyectos */}
-            {exp.proyectos && (
-              <div className="flex flex-col gap-3 mt-3">
-                {exp.proyectos.map((proyecto, j) => (
-                  <div key={j} className="bg-lila-claro rounded-lg p-4">
-                    <h5 className="font-bold text-gray-700 mb-2">
-                      🚀 {proyecto.cliente}
-                    </h5>
-
-                    <ul className="flex flex-col gap-1">
-                      {proyecto.logros.map((logro, k) => (
-                        <li
-                          key={k}
-                          className="text-gray-600 text-sm flex items-start gap-2"
-                        >
-                          <span className="text-naranja mt-0.5">▸</span>
-                          {logro}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* logros simples */}
-            {exp.logros && !exp.proyectos && (
-              <ul className="flex flex-col gap-1 mt-2">
-                {exp.logros.map((logro, k) => (
-                  <li
-                    key={k}
-                    className="text-gray-600 text-sm flex items-start gap-2"
-                  >
-                    <span className="text-naranja mt-0.5">▸</span>
-                    {logro}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )})}
+          );
+        })}
       </div>
     </section>
   );

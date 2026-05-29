@@ -30,7 +30,7 @@ function Perfil() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8">
+    <div className="max-w-6xl mx-auto px-6 py-8">
       {/* ── princial ── */}
       <section className="text-center mb-10">
         <img
