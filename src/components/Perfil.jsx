@@ -82,12 +82,23 @@ function Perfil() {
 
       {/* ── perfil profesional ── */}
       <section className="mb-12">
-        <h3 className="text-2xl font-bold text-gray-800 mb-1 border-l-4 border-naranja pl-4">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 border-l-4 border-naranja pl-4">
           Perfil Profesional
         </h3>
-        <p className="text-gray-600 leading-relaxed bg-white rounded-xl p-6 shadow-md">
+        <p className="text-gray-600 leading-relaxed bg-white rounded-xl p-6 shadow-md mb-6">
           {perfil.perfilProfesional}
         </p>
+
+        {perfil.trabajoActual && (
+          <div className="mt-6">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4 border-l-4 border-naranja pl-4">
+              Trabajo Actual
+            </h3>
+            <p className="text-gray-600 leading-relaxed bg-white rounded-xl p-6 shadow-md border-l-4 border-green-500">
+              {perfil.trabajoActual}
+            </p>
+          </div>
+        )}
       </section>
 
       <Competencias competencias={perfil.competencias} />

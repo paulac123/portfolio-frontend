@@ -10,6 +10,8 @@ function Experiencia({ experiencia }) {
         url: proyecto.url,
         imagen: proyecto.imagen,
         logros: proyecto.logros,
+        stack: proyecto.stack || exp.stack,
+        dificultad: proyecto.dificultad || exp.dificultad,
       }));
     }
     return [{
@@ -21,6 +23,8 @@ function Experiencia({ experiencia }) {
       imagen: exp.imagen,
       logros: exp.logros,
       descripcion: exp.descripcion,
+      stack: exp.stack,
+      dificultad: exp.dificultad,
     }];
   });
 
@@ -83,6 +87,20 @@ function Experiencia({ experiencia }) {
 
                 {item.descripcion && (
                   <p className="text-gray-600 text-sm mb-3">{item.descripcion}</p>
+                )}
+
+                {item.stack && (
+                  <div className="mb-3">
+                    <span className="text-xs font-bold text-naranja uppercase tracking-wider">Stack Tecnológico</span>
+                    <p className="text-gray-700 text-sm font-medium mt-1">{item.stack}</p>
+                  </div>
+                )}
+
+                {item.dificultad && (
+                  <div className="mb-3 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                    <span className="text-xs font-bold text-naranja uppercase tracking-wider">Reto Técnico</span>
+                    <p className="text-gray-600 text-sm italic mt-1">{item.dificultad}</p>
+                  </div>
                 )}
 
                 {item.logros && (
