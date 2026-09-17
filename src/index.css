@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-naranja: #ff6b2b;
@@ -8,4 +8,8 @@
   --color-lila: #9b8ec4;
   --color-lila-claro: #e8e4f5;
   --color-fondo: #fafafa;
+}
+
+*, *::before, *::after {
+  transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease;
 }

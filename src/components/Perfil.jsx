@@ -38,13 +38,23 @@ function Perfil() {
           alt="Foto de Paula"
           className="w-24 h-24 rounded-full object-cover mx-auto shadow-lg mb-6"
         />
-        <h1 className="text-2xl font-bold text-gray-800 mb-2">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
           {perfil.informacion.nombre}
         </h1>
         <h2 className="text-xl text-naranja font-semibold mb-3">
           {perfil.informacion.titulo}
         </h2>
-        <p className="text-gray-500 mb-6">📍 {perfil.informacion.ubicacion}</p>
+        <p className="text-gray-500 dark:text-gray-400 mb-6">📍 {perfil.informacion.ubicacion}</p>
+        {perfil.informacion.eslogan && (
+          <p className="text-naranja italic font-semibold mb-2">
+            "{perfil.informacion.eslogan}"
+          </p>
+        )}
+        {perfil.informacion.notaPortafolio && (
+          <p className="text-gray-400 dark:text-gray-500 text-xs mb-6">
+            {perfil.informacion.notaPortafolio}
+          </p>
+        )}
         <div className="flex justify-center gap-4 flex-wrap">
           <a
             href={perfil.informacion.linkedin}
@@ -82,24 +92,33 @@ function Perfil() {
 
       {/* ── perfil profesional ── */}
       <section className="mb-12">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4 border-l-4 border-naranja pl-4">
+        <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 border-l-4 border-naranja pl-4">
           Perfil Profesional
         </h3>
-        <p className="text-gray-600 leading-relaxed bg-white rounded-xl p-6 shadow-md mb-6">
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md mb-6">
           {perfil.perfilProfesional}
         </p>
 
         {perfil.trabajoActual && (
           <div className="mt-6">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4 border-l-4 border-naranja pl-4">
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 border-l-4 border-naranja pl-4">
               Trabajo Actual
             </h3>
-            <p className="text-gray-600 leading-relaxed bg-white rounded-xl p-6 shadow-md border-l-4 border-green-500">
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border-l-4 border-green-500">
               {perfil.trabajoActual}
             </p>
           </div>
         )}
       </section>
+
+      {perfil.informacion.historia && (
+        <section className="mb-12 bg-gradient-to-br from-naranja/10 to-transparent dark:from-naranja/20 rounded-2xl p-8 border border-naranja/20">
+          <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">✨ Mi historia</h3>
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg italic">
+            {perfil.informacion.historia}
+          </p>
+        </section>
+      )}
 
       <Competencias competencias={perfil.competencias} />
       <Experiencia experiencia={perfil.experienciaProfesional} />

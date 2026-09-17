@@ -30,7 +30,7 @@ function Experiencia({ experiencia }) {
 
   return (
     <section className="mb-12">
-      <h3 className="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-naranja pl-4">
+      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 border-l-4 border-naranja pl-4">
         Experiencia Profesional
       </h3>
 
@@ -41,7 +41,7 @@ function Experiencia({ experiencia }) {
             <div
               key={i}
               onClick={isClickable ? () => window.open(item.url, '_blank', 'noopener,noreferrer') : undefined}
-              className={`bg-white rounded-xl overflow-hidden shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-l-4 border-lila ${isClickable ? 'cursor-pointer' : ''}`}
+              className={`bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-l-4 border-lila ${isClickable ? 'cursor-pointer' : ''}`}
             >
               {item.imagen && (
                 <div className="relative h-48 overflow-hidden">
@@ -62,13 +62,13 @@ function Experiencia({ experiencia }) {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <h4 className="text-lg font-bold text-gray-800">{item.nombre}</h4>
+                    <h4 className="text-lg font-bold text-gray-800 dark:text-gray-100">{item.nombre}</h4>
                     <p className="text-naranja font-semibold">{item.rol}</p>
                     {item.modalidad && (
-                      <p className="text-gray-500 text-sm">{item.modalidad}</p>
+                      <p className="text-gray-500 dark:text-gray-400 text-sm">{item.modalidad}</p>
                     )}
                     {item.ubicacion && (
-                      <p className="text-gray-400 text-sm">📍 {item.ubicacion}</p>
+                      <p className="text-gray-400 dark:text-gray-500 text-sm">📍 {item.ubicacion}</p>
                     )}
                   </div>
                   <div className="flex flex-col items-end gap-2">
@@ -86,27 +86,27 @@ function Experiencia({ experiencia }) {
                 </div>
 
                 {item.descripcion && (
-                  <p className="text-gray-600 text-sm mb-3">{item.descripcion}</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">{item.descripcion}</p>
                 )}
 
                 {item.stack && (
                   <div className="mb-3">
                     <span className="text-xs font-bold text-naranja uppercase tracking-wider">Stack Tecnológico</span>
-                    <p className="text-gray-700 text-sm font-medium mt-1">{item.stack}</p>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm font-medium mt-1">{item.stack}</p>
                   </div>
                 )}
 
                 {item.dificultad && (
-                  <div className="mb-3 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                  <div className="mb-3 bg-gray-50 dark:bg-gray-900 p-3 rounded-lg border border-gray-100 dark:border-gray-700">
                     <span className="text-xs font-bold text-naranja uppercase tracking-wider">Reto Técnico</span>
-                    <p className="text-gray-600 text-sm italic mt-1">{item.dificultad}</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm italic mt-1">{item.dificultad}</p>
                   </div>
                 )}
 
                 {item.logros && (
                   <ul className="flex flex-col gap-1 mt-2">
                     {item.logros.map((logro, k) => (
-                      <li key={k} className="text-gray-600 text-sm flex items-start gap-2">
+                      <li key={k} className="text-gray-600 dark:text-gray-300 text-sm flex items-start gap-2">
                         <span className="text-naranja mt-0.5">▸</span>
                         {logro}
                       </li>
